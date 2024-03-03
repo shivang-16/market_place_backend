@@ -38,34 +38,34 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("A user is connected");
+// io.on("connection", (socket) => {
+//   console.log("A user is connected");
 
-  socket.on("joined", ({ user }, callback) => {
-    console.log(`${user} has joined`);
-    users[socket.id] = user; // Store the user's name by socket.id
-    callback(socket.id);
-    // Send a "user joined" message to all other connected users
-    socket.broadcast.emit("userJoined", {
-      user: "Admin:",
-      message: `${user} joined the chat`,
-    });
-  });
+//   socket.on("joined", ({ user }, callback) => {
+//     console.log(`${user} has joined`);
+//     users[socket.id] = user; // Store the user's name by socket.id
+//     callback(socket.id);
+//     // Send a "user joined" message to all other connected users
+//     socket.broadcast.emit("userJoined", {
+//       user: "Admin:",
+//       message: `${user} joined the chat`,
+//     });
+//   });
 
-  socket.on("bid", (payload) => {
-    console.log(payload);
-    io.emit("bid", payload);
-  });
+//   socket.on("bid", (payload) => {
+//     console.log(payload);
+//     io.emit("bid", payload);
+//   });
 
-  socket.on("disconnect", () => {
-    const user = users[socket.id];
-    if (user) {
-      delete users[socket.id];
-      // Send a "user left" message to all other connected users
-      socket.broadcast.emit("leave", {
-        user: "Admin:",
-        message: `${user} left the chat`,
-      });
-    }
-  });
-});
+//   socket.on("disconnect", () => {
+//     const user = users[socket.id];
+//     if (user) {
+//       delete users[socket.id];
+//       // Send a "user left" message to all other connected users
+//       socket.broadcast.emit("leave", {
+//         user: "Admin:",
+//         message: `${user} left the chat`,
+//       });
+//     }
+//   });
+// });
